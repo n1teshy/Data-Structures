@@ -161,7 +161,3 @@ for (let word of words) {
   trie.addWord(word);
 }
 trie.setLinks();
-const text = "thisisasentence";
-trie
-  .getMatches(text)
-  .forEach((indices) => console.log(text.substring(indices[0], indices[1])));
