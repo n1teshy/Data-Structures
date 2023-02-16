@@ -131,6 +131,21 @@ class SinglyLinkedList {
     }
   }
 
+  revserse(){
+    this.tail = this.head;
+    let previous = this.head;
+    let next = previous !== null ? previous.next : null;
+    // the head is going to become the new tail, set its 'next' to null
+    previous.next = null;
+    while(previous !== null && next !== null){
+      const prevNext = next.next;
+      next.next = previous;
+      previous = next;
+      next = prevNext;
+    }
+    this.head = previous;
+  }
+
   print(delimiter) {
     const arr = [this.head === null ? null : this.head.data];
     let node = this.head === null ? null : this.head.next;
@@ -146,10 +161,6 @@ const list = new SinglyLinkedList();
 list.push(1);
 list.push(3);
 list.push(5);
-list.push(5);
-list.insertNthNode(1, 2);
-list.insertNthNode(3, 4);
-list.insertNthNode(5, 6);
-list.deleteNthNode(6);
-list.print(" => ");
-console.log(list);
+list.push(6);
+list.revserse();
+list.print()
