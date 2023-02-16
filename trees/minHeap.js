@@ -1,0 +1,117 @@
+class Node {
+  constructor(key, data = null) {
+    this.key = key;
+    this.data = data;
+  }
+}
+
+class MinHeap {
+  #nodes = [];
+
+  static getParentPosition(index) {
+    return Math.floor((index - 1) / 2);
+  }
+
+  static getLeftChildPosition(index) {
+    return index * 2 + 1;
+  }
+
+  static getRightChildPosition(index) {
+    return index * 2 + 2;
+  }
+
+  get size() {
+    return this.#nodes.length;
+  }
+
+  swap(index1, index2) {
+    const temp = this.#nodes[index1];
+    this.#nodes[index1] = this.#nodes[index2];
+    this.#nodes[index2] = temp;
+  }
+
+  shiftUpwards(position) {
+    const node = this.#nodes[position];
+    while (true) {
+      let parentPosition = MinHeap.getParentPosition(position);
+      if (
+        this.#nodes[parentPosition] !== undefined &&
+        this.#nodes[parentPosition].key > node.key
+      ) {
+        const temp = this.#nodes[position];
+        this.#nodes[position] = this.#nodes[parentPosition];
+        this.#nodes[parentPosition] = temp;
+        position = parentPosition;
+      } else {
+        break;
+      }
+    }
+  }
+
+  shiftDownwards(position) {
+    let i = 0;
+    while (true) {
+      i++;
+      const node = this.#nodes[position];
+      const leftChild = this.#nodes[MinHeap.getLeftChildPosition(position)];
+      const rightChild = this.#nodes[MinHeap.getRightChildPosition(position)];
+      const diffLeft =
+        (leftChild !== undefined ? leftChild.key : Number.MAX_VALUE) - node.key;
+      const diffRight =
+        (rightChild !== undefined ? rightChild.key : Number.MAX_VALUE) -
+        node.key;
+      if (diffLeft >= 0 && diffRight >= 0) {
+        break;
+      } else {
+        const positionToSwap =
+          diffLeft < diffRight
+            ? MinHeap.getLeftChildPosition(position)
+            : MinHeap.getRightChildPosition(position);
+        this.swap(position, positionToSwap);
+        position = positionToSwap;
+      }
+    }
+  }
+
+  insert(node) {
+    this.#nodes.push(node);
+    this.shiftUpwards(this.#nodes.length - 1);
+  }
+
+  pop() {
+    let result = null;
+    if (this.#nodes.length > 0) {
+      result = this.#nodes[0];
+      this.#nodes.length--;
+    }
+    if (this.#nodes.length > 0) {
+      this.#nodes[0] = this.#nodes[this.#nodes.length - 1];
+      this.shiftDownwards(0);
+    }
+    return result;
+  }
+
+  isValid() {
+    let isValid = true;
+    let i = 0;
+    while (i < this.#nodes.length) {
+      const leftChild = this.#nodes[MinHeap.getLeftChildPosition(i)];
+      const rightChild = this.#nodes[MinHeap.getRightChildPosition(i)];
+      if (
+        (leftChild === undefined || leftChild.key >= this.#nodes[i].key) &&
+        (rightChild === undefined || rightChild.key >= this.#nodes[i].key)
+      ) {
+        i++;
+      } else {
+        isValid = false;
+        break;
+      }
+    }
+    return isValid;
+  }
+}
+const heap = new MinHeap();
+for (let i = 0; i < 100; i++) {
+  heap.insert(new Node(Math.floor(Math.random() * 100)));
+}
+console.log(heap.isValid())
