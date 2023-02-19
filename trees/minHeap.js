@@ -49,9 +49,7 @@ class MinHeap {
   }
 
   shiftDownwards(position) {
-    let i = 0;
     while (true) {
-      i++;
       const node = this.#nodes[position];
       const leftChild = this.#nodes[MinHeap.getLeftChildPosition(position)];
       const rightChild = this.#nodes[MinHeap.getRightChildPosition(position)];
