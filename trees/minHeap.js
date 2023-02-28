@@ -1,5 +1,5 @@
 class Node {
-  constructor(key, data = null) {
+  constructor(key, data) {
     this.key = key;
     this.data = data;
   }
@@ -71,8 +71,8 @@ class MinHeap {
     }
   }
 
-  insert(key) {
-    this.#nodes.push(new Node(key));
+  insert(key, data = null) {
+    this.#nodes.push(new Node(key, data));
     this.shiftUpwards(this.#nodes.length - 1);
   }
 
