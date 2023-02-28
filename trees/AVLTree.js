@@ -150,9 +150,9 @@ class AVLTree {
     return root;
   }
 }
-
+module.exports = AVLTree;
 const tree = new AVLTree();
 for(let i = 0; i < 100; i++){
   tree.insert(new Node(i));
 }
-console.log(tree.search(99));
+// console.log(tree.search(99));
