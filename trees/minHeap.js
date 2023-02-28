@@ -115,4 +115,4 @@ const heap = new MinHeap();
 for (let i = 0; i < 100; i++) {
   heap.insert(Math.floor(Math.random() * 100));
 }
-console.log(heap.isValid())
+// console.log(heap.isValid())
