@@ -77,8 +77,8 @@ class AVLTree {
     return root;
   }
 
-  insert(node) {
-    this.root = this._insert(this.root, node);
+  insert(key) {
+    this.root = this._insert(this.root, new Node(key));
   }
 
   getMinimum(root) {
@@ -153,6 +153,6 @@ class AVLTree {
 module.exports = AVLTree;
 const tree = new AVLTree();
 for(let i = 0; i < 100; i++){
-  tree.insert(new Node(i));
+  tree.insert(i);
 }
 // console.log(tree.search(99));
