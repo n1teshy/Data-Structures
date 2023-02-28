@@ -71,8 +71,8 @@ class MinHeap {
     }
   }
 
-  insert(node) {
-    this.#nodes.push(node);
+  insert(key) {
+    this.#nodes.push(new Node(key));
     this.shiftUpwards(this.#nodes.length - 1);
   }
 
@@ -110,6 +110,6 @@ class MinHeap {
 }
 const heap = new MinHeap();
 for (let i = 0; i < 100; i++) {
-  heap.insert(new Node(Math.floor(Math.random() * 100)));
+  heap.insert(Math.floor(Math.random() * 100));
 }
 console.log(heap.isValid())
