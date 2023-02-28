@@ -108,6 +108,9 @@ class MinHeap {
     return isValid;
   }
 }
+
+module.exports = MinHeap;
+
 const heap = new MinHeap();
 for (let i = 0; i < 100; i++) {
   heap.insert(Math.floor(Math.random() * 100));
