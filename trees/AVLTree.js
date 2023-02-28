@@ -1,6 +1,7 @@
 class Node {
-  constructor(key) {
+  constructor(key, data) {
     this.key = key;
+    this.data = data;
     this.left = null;
     this.right = null;
     this.height = 1;
@@ -77,8 +78,8 @@ class AVLTree {
     return root;
   }
 
-  insert(key) {
-    this.root = this._insert(this.root, new Node(key));
+  insert(key, data = null) {
+    this.root = this._insert(this.root, new Node(key, data));
   }
 
   getMinimum(root) {
