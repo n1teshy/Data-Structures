@@ -122,7 +122,7 @@ class AVLTree {
       return this.rightRotate(root);
     }
     if (balance < -1) {
-      if (this.getBalanceFactor(root.right > 0)) {
+      if (this.getBalanceFactor(root.right) > 0) {
         root.right = this.rightRotate(root.right);
       }
       return this.leftRotate(root);
