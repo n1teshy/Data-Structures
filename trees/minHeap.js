@@ -78,13 +78,14 @@ class MinHeap {
 
   pop() {
     let result = null;
-    if (this.#nodes.length > 0) {
+    if (this.size > 0) {
       result = this.#nodes[0];
+      const lastNode = this.#nodes[this.size - 1];
       this.#nodes.length--;
-    }
-    if (this.#nodes.length > 0) {
-      this.#nodes[0] = this.#nodes[this.#nodes.length - 1];
-      this.shiftDownwards(0);
+      if (this.size > 0) {
+        this.#nodes[0] = lastNode;
+        this.shiftDownwards(0);
+      }
     }
     return result;
   }
